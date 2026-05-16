@@ -35,7 +35,7 @@ jobs:
       - name: Run tests
         run: |
           mkdir -p reports
-          npm test -- --reporter=default --reporter=junit --outputFile.junit=reports/vitest-junit.xml
+          npm test
 
       - name: Publish test results
         if: always()

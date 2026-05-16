@@ -4,9 +4,13 @@ type VitestConfig = ViteUserConfig & {
   test?: TestUserConfig;
 };
 
+const isCI = process.env.CI === 'true';
+
 const config: VitestConfig = {
   test: {
-    exclude: ['dist/**', 'node_modules/**']
+    exclude: ['dist/**', 'node_modules/**'],
+    reporters: isCI ? ['default', 'junit'] : ['default'],
+    outputFile: isCI ? { junit: 'reports/vitest-junit.xml' } : undefined
   }
 };
 
