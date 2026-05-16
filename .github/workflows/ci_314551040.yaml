@@ -35,15 +35,13 @@ jobs:
       - name: Run tests
         run: |
           mkdir -p reports
-          npm test
+          npm run test:ci
 
       - name: Publish test results
         if: always()
-        uses: dorny/test-reporter@v1
+        uses: EnricoMi/publish-unit-test-result-action@v2
         with:
-          name: Vitest Results
-          path: reports/vitest-junit.xml
-          reporter: jest-junit
+          files: reports/vitest-junit.xml
 
       - name: Upload test report artifact
         if: always()
